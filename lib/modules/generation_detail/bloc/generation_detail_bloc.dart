@@ -3,6 +3,7 @@ import 'dart:convert';
 
 import 'package:equatable/equatable.dart';
 import 'package:esensi_solusi_buana_test/modules/generation_detail/models/models.dart';
+import 'package:flutter/services.dart';
 import 'package:hydrated_bloc/hydrated_bloc.dart';
 import 'package:http/http.dart' as http;
 import 'package:json_annotation/json_annotation.dart';
@@ -42,7 +43,16 @@ class GenerationDetailBloc
       final data = await _fetchGenerationDetail();
       emit(state.copyWith(detail: data, loading: false));
     } catch (e) {
-      // ! Error code here
+      String msg = '';
+      if (e is PlatformException) {
+        msg = e.message ?? '-';
+      } else {
+        msg =
+            'Your connection trouble\nfor accessing offline mode you need load the data first';
+      }
+      emit(
+        state.copyWith(errorMessage: msg, loading: false),
+      );
     }
   }
 

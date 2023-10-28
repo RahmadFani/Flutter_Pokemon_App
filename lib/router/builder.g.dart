@@ -41,6 +41,12 @@ RouteBase get $homeRoute => GoRouteData.$route(
         GoRouteData.$route(
           path: 'generation-detail',
           factory: $GenerationDetailRouteExtension._fromState,
+          routes: [
+            GoRouteData.$route(
+              path: 'pokemon-detail',
+              factory: $PokemonDetailRouteExtension._fromState,
+            ),
+          ],
         ),
       ],
     );
@@ -85,4 +91,32 @@ extension $GenerationDetailRouteExtension on GenerationDetailRoute {
       context.pushReplacement(location);
 
   void replace(BuildContext context) => context.replace(location);
+}
+
+extension $PokemonDetailRouteExtension on PokemonDetailRoute {
+  static PokemonDetailRoute _fromState(GoRouterState state) =>
+      PokemonDetailRoute(
+        name: state.uri.queryParameters['name']!,
+        url: state.uri.queryParameters['url']!,
+        $extra: state.extra as List<PokemonSpesies>,
+      );
+
+  String get location => GoRouteData.$location(
+        '/home/generation-detail/pokemon-detail',
+        queryParams: {
+          'name': name,
+          'url': url,
+        },
+      );
+
+  void go(BuildContext context) => context.go(location, extra: $extra);
+
+  Future<T?> push<T>(BuildContext context) =>
+      context.push<T>(location, extra: $extra);
+
+  void pushReplacement(BuildContext context) =>
+      context.pushReplacement(location, extra: $extra);
+
+  void replace(BuildContext context) =>
+      context.replace(location, extra: $extra);
 }
