@@ -5,8 +5,11 @@ class HomePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const Scaffold(
-      body: HomeView(),
+    return BlocProvider(
+      create: (context) => HomeBloc()..add(GettingListGeneration()),
+      child: const Scaffold(
+        body: HomeView(),
+      ),
     );
   }
 }
@@ -16,9 +19,64 @@ class HomeView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const BackgroundWidget(
+    return BackgroundWidget(
       opacity: .5,
-      child: Placeholder(),
+      child: SafeArea(
+        child: Column(
+          children: [
+            const Flexible(
+              flex: 1,
+              child: Align(
+                alignment: Alignment.center,
+                child: Text(
+                  'EXPLORE POKEMON',
+                  textAlign: TextAlign.center,
+                  style: TextStyle(
+                    color: Colors.white,
+                    fontSize: 18,
+                    fontFamily: 'Poppins',
+                    fontWeight: FontWeight.w600,
+                    height: 0,
+                    letterSpacing: 0.16,
+                  ),
+                ),
+              ),
+            ),
+            Expanded(
+                flex: 5,
+                child: Container(
+                  color: Colors.red,
+                )),
+            Container(
+              margin: const EdgeInsets.symmetric(
+                vertical: 30,
+              ),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                children: [
+                  CustomButtonIconWidget(
+                    onPressed: () {},
+                    icon: Image.asset('assets/icons/pokeball.png'),
+                    label: const Text(
+                      'EXPLORE',
+                      style: TextStyle(color: Colors.white),
+                    ),
+                  ),
+                  CustomButtonIconWidget(
+                    onPressed: () {},
+                    isOutline: true,
+                    icon: Image.asset('assets/icons/heart.png'),
+                    label: const Text(
+                      'FAVORITE',
+                      style: TextStyle(color: Colors.white),
+                    ),
+                  ),
+                ],
+              ),
+            )
+          ],
+        ),
+      ),
     );
   }
 }
