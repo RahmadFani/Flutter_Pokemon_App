@@ -29,7 +29,7 @@ class HomeView extends StatelessWidget {
           previous.currentTab != current.currentTab,
       builder: (context, state) {
         return BackgroundWidget(
-          opacity: .5,
+          opacity: .6,
           child: SafeArea(
             child: Column(
               children: [

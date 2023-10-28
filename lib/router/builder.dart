@@ -1,7 +1,10 @@
-import 'package:esensi_solusi_buana_test/modules/home/home.dart';
-import 'package:esensi_solusi_buana_test/modules/splash_screen/splash_screen.dart';
+// ignore_for_file: public_member_api_docs, sort_constructors_first
+import 'package:esensi_solusi_buana_test/modules/generation_detail/generation_detail.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+
+import 'package:esensi_solusi_buana_test/modules/home/home.dart';
+import 'package:esensi_solusi_buana_test/modules/splash_screen/splash_screen.dart';
 
 part 'builder.g.dart';
 
@@ -18,6 +21,9 @@ class SplashScreenRoute extends GoRouteData {
 
 @TypedGoRoute<HomeRoute>(
   path: '/home',
+  routes: [
+    TypedGoRoute<GenerationDetailRoute>(path: 'generation-detail'),
+  ],
 )
 class HomeRoute extends GoRouteData {
   const HomeRoute();
@@ -26,6 +32,32 @@ class HomeRoute extends GoRouteData {
   Page<void> buildPage(BuildContext context, GoRouterState state) {
     return CustomTransitionPage(
       child: const HomePage(),
+      transitionsBuilder: (context, animation, secondaryAnimation, child) {
+        return FadeTransition(
+          opacity: animation,
+          child: child,
+        );
+      },
+    );
+  }
+}
+
+class GenerationDetailRoute extends GoRouteData {
+  final String name;
+  final String url;
+
+  const GenerationDetailRoute({
+    required this.name,
+    required this.url,
+  });
+
+  @override
+  Page<void> buildPage(BuildContext context, GoRouterState state) {
+    return CustomTransitionPage(
+      child: GenerationDetailPage(
+        url: url,
+        name: name,
+      ),
       transitionsBuilder: (context, animation, secondaryAnimation, child) {
         return FadeTransition(
           opacity: animation,

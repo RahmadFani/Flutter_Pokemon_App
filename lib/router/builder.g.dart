@@ -37,6 +37,12 @@ extension $SplashScreenRouteExtension on SplashScreenRoute {
 RouteBase get $homeRoute => GoRouteData.$route(
       path: '/home',
       factory: $HomeRouteExtension._fromState,
+      routes: [
+        GoRouteData.$route(
+          path: 'generation-detail',
+          factory: $GenerationDetailRouteExtension._fromState,
+        ),
+      ],
     );
 
 extension $HomeRouteExtension on HomeRoute {
@@ -44,6 +50,31 @@ extension $HomeRouteExtension on HomeRoute {
 
   String get location => GoRouteData.$location(
         '/home',
+      );
+
+  void go(BuildContext context) => context.go(location);
+
+  Future<T?> push<T>(BuildContext context) => context.push<T>(location);
+
+  void pushReplacement(BuildContext context) =>
+      context.pushReplacement(location);
+
+  void replace(BuildContext context) => context.replace(location);
+}
+
+extension $GenerationDetailRouteExtension on GenerationDetailRoute {
+  static GenerationDetailRoute _fromState(GoRouterState state) =>
+      GenerationDetailRoute(
+        name: state.uri.queryParameters['name']!,
+        url: state.uri.queryParameters['url']!,
+      );
+
+  String get location => GoRouteData.$location(
+        '/home/generation-detail',
+        queryParams: {
+          'name': name,
+          'url': url,
+        },
       );
 
   void go(BuildContext context) => context.go(location);

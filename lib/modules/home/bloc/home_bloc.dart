@@ -3,7 +3,8 @@ import 'dart:convert';
 
 import 'package:equatable/equatable.dart';
 import 'package:esensi_solusi_buana_test/helpers/base_url.dart';
-import 'package:esensi_solusi_buana_test/modules/home/models/models.dart';
+import 'package:esensi_solusi_buana_test/modules/home/models/generation.dart';
+
 import 'package:hydrated_bloc/hydrated_bloc.dart';
 import 'package:json_annotation/json_annotation.dart';
 import 'package:http/http.dart' as http;

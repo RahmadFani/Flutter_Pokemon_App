@@ -55,12 +55,16 @@ class _GenerationList extends StatelessWidget {
         itemBuilder: (_, index) {
           final generation = state.generations[index];
           return Padding(
-            padding: const EdgeInsets.only(bottom: 8.0),
+            padding: const EdgeInsets.only(bottom: 16.0),
             child: SizedBox(
               width: double.infinity,
               height: 50,
               child: OutlinedButton(
-                onPressed: () {},
+                onPressed: () {
+                  GenerationDetailRoute(
+                          name: generation.name, url: generation.url)
+                      .go(context);
+                },
                 child: Text(
                   generation.name.toUpperCase(),
                 ),
