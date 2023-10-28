@@ -8,4 +8,6 @@ class BaseUrl {
       Uri.https(baseUrl, '/api/v2/$unencodedPath');
 
   static Uri get generationUri => apiUrlV2('generation');
+
+  static Uri getPokemon(String id) => apiUrlV2('pokemon/$id/');
 }

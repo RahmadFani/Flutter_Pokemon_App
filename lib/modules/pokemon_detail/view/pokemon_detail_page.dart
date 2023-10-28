@@ -14,8 +14,15 @@ class PokemonDetailPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const Scaffold(
-      body: PokemonDetailView(),
+    return BlocProvider(
+      create: (context) => PokemonDetailBloc(
+        name: name,
+        url: url,
+        pokemons: pokemons,
+      )..add(GetPokemonDetail()),
+      child: const Scaffold(
+        body: PokemonDetailView(),
+      ),
     );
   }
 }
@@ -25,6 +32,73 @@ class PokemonDetailView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const BackgroundScanWidget(child: Placeholder());
+    return BlocBuilder<PokemonDetailBloc, PokemonDetailState>(
+      builder: (context, state) {
+        return BackgroundScanWidget(
+          child: Stack(
+            children: [
+              Positioned(
+                top: MediaQuery.of(context).padding.top + kToolbarHeight,
+                left: 0,
+                right: 0,
+                bottom: 0,
+                child: state.errorMessage.isNotEmpty && state.pokemon == null
+                    ? _errorBody(context, state)
+                    : state.pokemon == null
+                        ? const SizedBox.shrink()
+                        : _PokemonCard(
+                            state: state,
+                          ),
+              ),
+              const Padding(
+                padding: EdgeInsets.symmetric(vertical: 16.0),
+                child: SafeArea(
+                  child: AppBarTransparant(
+                    title: '',
+                    color: Colors.black,
+                  ),
+                ),
+              ),
+            ],
+          ),
+        );
+      },
+    );
+  }
+
+  Widget _errorBody(BuildContext context, PokemonDetailState state) {
+    return Column(
+      mainAxisSize: MainAxisSize.min,
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: [
+        Container(
+          width: context.getSize.width * .7,
+          margin: const EdgeInsets.all(16),
+          padding: const EdgeInsets.all(16),
+          decoration: BoxDecoration(
+            color: Colors.white,
+            borderRadius: BorderRadius.circular(
+              12,
+            ),
+          ),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              const Icon(
+                Icons.network_check_outlined,
+                size: 40,
+              ),
+              Text(
+                state.errorMessage.isEmpty ? '-' : state.errorMessage,
+                textAlign: TextAlign.center,
+                style: const TextStyle(
+                  fontSize: 16,
+                ),
+              ),
+            ],
+          ),
+        ),
+      ],
+    );
   }
 }

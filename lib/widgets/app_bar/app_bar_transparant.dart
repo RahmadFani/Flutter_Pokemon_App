@@ -3,12 +3,11 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
 class AppBarTransparant extends StatelessWidget {
-  const AppBarTransparant({
-    super.key,
-    required this.title,
-  });
+  const AppBarTransparant(
+      {super.key, required this.title, this.color = Colors.white});
 
   final String title;
+  final Color color;
 
   @override
   Widget build(BuildContext context) {
@@ -21,8 +20,8 @@ class AppBarTransparant extends StatelessWidget {
             child: Text(
               title,
               textAlign: TextAlign.center,
-              style: const TextStyle(
-                color: Colors.white,
+              style: TextStyle(
+                color: color,
                 fontSize: 18,
                 fontFamily: 'Poppins',
                 fontWeight: FontWeight.w600,
@@ -36,9 +35,9 @@ class AppBarTransparant extends StatelessWidget {
               onPressed: () {
                 GoRouter.of(context).pop();
               },
-              icon: const Icon(
+              icon: Icon(
                 CupertinoIcons.back,
-                color: Colors.white,
+                color: color,
               ),
             )
         ],
