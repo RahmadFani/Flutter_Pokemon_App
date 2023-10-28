@@ -18,7 +18,7 @@ class _PokemonCard extends StatelessWidget {
           child: Container(
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(30),
-              color: Colors.white,
+              color: Colors.white.withOpacity(.6),
             ),
             width: double.infinity,
             constraints:
@@ -67,7 +67,9 @@ class _PokemonCard extends StatelessWidget {
               ),
             ),
           ),
-        ),
+        ).animate().fadeIn(
+              delay: 900.milliseconds,
+            ),
         Positioned(
           top: 0,
           left: 0,
@@ -78,7 +80,7 @@ class _PokemonCard extends StatelessWidget {
             width: 280,
             fit: BoxFit.cover,
           ),
-        )
+        ).animate().scale(delay: 500.milliseconds)
       ],
     );
   }

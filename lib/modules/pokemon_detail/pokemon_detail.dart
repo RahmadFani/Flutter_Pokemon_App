@@ -6,6 +6,7 @@ import 'package:esensi_solusi_buana_test/modules/pokemon_detail/models/pokemon_d
 import 'package:esensi_solusi_buana_test/widgets/app_bar/app_bar_transparant.dart';
 import 'package:esensi_solusi_buana_test/widgets/background/background_scan.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 part 'view/pokemon_detail_page.dart';
