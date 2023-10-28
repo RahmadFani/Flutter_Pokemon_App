@@ -89,7 +89,11 @@ class PokemonDetailRoute extends GoRouteData {
   @override
   Page<void> buildPage(BuildContext context, GoRouterState state) {
     return CustomTransitionPage(
-      child: const PokemonDetailPage(),
+      child: PokemonDetailPage(
+        name: name,
+        url: url,
+        pokemons: $extra,
+      ),
       transitionsBuilder: (context, animation, secondaryAnimation, child) {
         return FadeTransition(
           opacity: animation,

@@ -1,7 +1,16 @@
 part of '../pokemon_detail.dart';
 
 class PokemonDetailPage extends StatelessWidget {
-  const PokemonDetailPage({super.key});
+  const PokemonDetailPage({
+    super.key,
+    required this.name,
+    required this.url,
+    this.pokemons = const [],
+  });
+
+  final String name;
+  final String url;
+  final List<PokemonSpesies> pokemons;
 
   @override
   Widget build(BuildContext context) {
