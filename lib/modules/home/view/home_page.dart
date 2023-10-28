@@ -17,66 +17,66 @@ class HomePage extends StatelessWidget {
 class HomeView extends StatelessWidget {
   const HomeView({super.key});
 
+  static List<Widget> tabView = [
+    const _GenerationList(),
+    const _FavoriteList(),
+  ];
+
   @override
   Widget build(BuildContext context) {
-    return BackgroundWidget(
-      opacity: .5,
-      child: SafeArea(
-        child: Column(
-          children: [
-            const Flexible(
-              flex: 1,
-              child: Align(
-                alignment: Alignment.center,
-                child: Text(
-                  'EXPLORE POKEMON',
-                  textAlign: TextAlign.center,
-                  style: TextStyle(
-                    color: Colors.white,
-                    fontSize: 18,
-                    fontFamily: 'Poppins',
-                    fontWeight: FontWeight.w600,
-                    height: 0,
-                    letterSpacing: 0.16,
-                  ),
+    return BlocBuilder<HomeBloc, HomeState>(
+      buildWhen: (previous, current) =>
+          previous.currentTab != current.currentTab,
+      builder: (context, state) {
+        return BackgroundWidget(
+          opacity: .5,
+          child: SafeArea(
+            child: Column(
+              children: [
+                Expanded(
+                  child: tabView.elementAt(state.currentTab),
                 ),
-              ),
+                Container(
+                  margin: const EdgeInsets.symmetric(
+                    vertical: 30,
+                  ),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    children: [
+                      CustomButtonIconWidget(
+                        onPressed: () {
+                          context
+                              .read<HomeBloc>()
+                              .add(ChangeCurrentTabHome(value: 0));
+                        },
+                        isOutline: !(state.currentTab == 0),
+                        icon: Image.asset('assets/icons/pokeball.png'),
+                        label: const Text(
+                          'EXPLORE',
+                          style: TextStyle(color: Colors.white),
+                        ),
+                      ),
+                      CustomButtonIconWidget(
+                        onPressed: () {
+                          context
+                              .read<HomeBloc>()
+                              .add(ChangeCurrentTabHome(value: 1));
+                        },
+                        isOutline: !(state.currentTab == 1),
+                        icon: Image.asset('assets/icons/heart.png'),
+                        label: const Text(
+                          'FAVORITE',
+                          style: TextStyle(color: Colors.white),
+                        ),
+                      ),
+                    ],
+                  ),
+                )
+              ],
             ),
-            Expanded(
-                flex: 5,
-                child: Container(
-                  color: Colors.red,
-                )),
-            Container(
-              margin: const EdgeInsets.symmetric(
-                vertical: 30,
-              ),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                children: [
-                  CustomButtonIconWidget(
-                    onPressed: () {},
-                    icon: Image.asset('assets/icons/pokeball.png'),
-                    label: const Text(
-                      'EXPLORE',
-                      style: TextStyle(color: Colors.white),
-                    ),
-                  ),
-                  CustomButtonIconWidget(
-                    onPressed: () {},
-                    isOutline: true,
-                    icon: Image.asset('assets/icons/heart.png'),
-                    label: const Text(
-                      'FAVORITE',
-                      style: TextStyle(color: Colors.white),
-                    ),
-                  ),
-                ],
-              ),
-            )
-          ],
-        ),
-      ),
+          ),
+        );
+      },
     );
   }
 }
