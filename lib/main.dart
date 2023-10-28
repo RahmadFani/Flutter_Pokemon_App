@@ -1,3 +1,4 @@
+import 'package:esensi_solusi_buana_test/helpers/injection.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:hydrated_bloc/hydrated_bloc.dart';
@@ -12,5 +13,8 @@ Future<void> main() async {
         ? HydratedStorage.webStorageDirectory
         : await getTemporaryDirectory(),
   );
+
+  Injection.init();
+
   runApp(const App());
 }

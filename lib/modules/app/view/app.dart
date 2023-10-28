@@ -1,6 +1,9 @@
 import 'package:esensi_solusi_buana_test/helpers/theme.dart';
-import 'package:esensi_solusi_buana_test/router/router.dart';
 import 'package:flutter/material.dart';
+import 'package:get_it/get_it.dart';
+import 'package:go_router/go_router.dart';
+
+GetIt getIt = GetIt.I;
 
 class App extends StatelessWidget {
   const App({super.key});
@@ -16,7 +19,7 @@ class AppView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final router = MyRouter.init();
+    final router = getIt<GoRouter>();
     return MaterialApp.router(
       title: 'Flutter ESB Technical Test',
       theme: ThemeData(
