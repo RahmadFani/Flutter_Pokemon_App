@@ -9,6 +9,7 @@ Name: Rahmad Fani
 - BLOC
 - GetIt (Injection)
 - GoRouter (Navigation)
+- Unit Testing (56.7%) [ON-PROGRESS]
 
 ### FEATURED :boom:
 - OFFLINE MODE
