@@ -3,7 +3,7 @@ import 'dart:convert';
 
 import 'package:equatable/equatable.dart';
 import 'package:esensi_solusi_buana_test/modules/generation_detail/models/models.dart';
-import 'package:flutter/services.dart';
+import 'package:flutter_animate/flutter_animate.dart';
 import 'package:hydrated_bloc/hydrated_bloc.dart';
 import 'package:http/http.dart' as http;
 import 'package:json_annotation/json_annotation.dart';
@@ -43,25 +43,24 @@ class GenerationDetailBloc
       final data = await _fetchGenerationDetail();
       emit(state.copyWith(detail: data, loading: false));
     } catch (e) {
-      String msg = '';
-      if (e is PlatformException) {
-        msg = e.message ?? '-';
-      } else {
-        msg =
-            'Your connection trouble\nfor accessing offline mode you need load the data first';
-      }
       emit(
-        state.copyWith(errorMessage: msg, loading: false),
+        state.copyWith(errorMessage: e.toString(), loading: false),
       );
     }
   }
 
   Future<GenerationDetail> _fetchGenerationDetail() async {
-    final response = await http.get(Uri.parse(url));
+    final response = await http.get(Uri.parse(url)).timeout(
+      10.seconds,
+      onTimeout: () {
+        return Future.error(
+            'Trouble internet, Mode offline available if you already load data');
+      },
+    );
     if (response.statusCode == 200) {
       final body = json.decode(response.body);
       return GenerationDetail.fromJson(body);
     }
-    throw Exception('error fetching generation detail');
+    return Future.error('error fetching generation detail');
   }
 }

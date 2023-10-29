@@ -5,7 +5,6 @@ import 'package:equatable/equatable.dart';
 import 'package:esensi_solusi_buana_test/helpers/base_url.dart';
 import 'package:esensi_solusi_buana_test/modules/generation_detail/models/generation_detail.dart';
 import 'package:esensi_solusi_buana_test/modules/pokemon_detail/models/pokemon_detail.dart';
-import 'package:flutter/services.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:hydrated_bloc/hydrated_bloc.dart';
 import 'package:json_annotation/json_annotation.dart';
@@ -53,9 +52,11 @@ class PokemonDetailBloc
     try {
       final data = await _fetchPokemonDetail();
       emit(state.copyWith(pokemon: data));
-    } on PlatformException catch (e) {
+    } catch (e) {
       emit(
-        state.copyWith(errorMessage: e.message),
+        state.copyWith(
+          errorMessage: e.toString(),
+        ),
       );
     }
   }
@@ -66,9 +67,9 @@ class PokemonDetailBloc
       BaseUrl.getPokemon(pokemonId),
     )
         .timeout(
-      20.seconds,
+      10.seconds,
       onTimeout: () {
-        throw Exception(
+        return Future.error(
             'Trouble internet, Mode offline available if you already load data');
       },
     );
@@ -77,6 +78,7 @@ class PokemonDetailBloc
       final body = json.decode(response.body);
       return PokemonDetail.fromJson(body);
     }
-    throw Exception('Error fetch pokemon detail');
+    return Future.error(
+        'Trouble internet, Mode offline available if you already load data');
   }
 }
