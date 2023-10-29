@@ -31,3 +31,9 @@ dart run build_runner build
 flutter test --coverage
 ```
 
+
+> Build App Android
+``` terminal
+flutter buid apk
+```
+
