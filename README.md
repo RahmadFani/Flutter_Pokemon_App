@@ -1,16 +1,26 @@
-# esensi_solusi_buana_test
+# PT Esensi Solusi Buana
 
-A new Flutter project.
+FLUTTER ASSESSMENT TEST
 
-## Getting Started
+Name: Rahmad Fani
 
-This project is a starting point for a Flutter application.
+### APP STACK :dizzy:
+- MVVM
+- BLOC
+- GetIt (Injection)
+- GoRouter (Navigation)
 
-A few resources to get you started if this is your first Flutter project:
+### FEATURED :boom:
+- OFFLINE MODE
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+### How to use app
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+> Run Flutter
+``` terminal
+flutter run 
+```
+
+> Generate build_runner
+``` terminal
+dart run build_runner build
+```
