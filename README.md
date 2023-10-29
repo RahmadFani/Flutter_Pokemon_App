@@ -18,6 +18,7 @@ Name: Rahmad Fani
 
 > Run Flutter
 ``` terminal
+flutter pub get
 flutter run 
 ```
 
