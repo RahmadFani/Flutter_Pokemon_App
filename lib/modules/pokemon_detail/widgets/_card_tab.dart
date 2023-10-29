@@ -142,14 +142,23 @@ class __CardTabState extends State<_CardTab> {
                 builder: (context, constraints) {
                   return Row(
                     children: [
-                      SizedBox(
-                        height: 20,
-                        width: constraints.maxWidth * (value / 100),
-                        child: DecoratedBox(
-                            decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(10),
-                          color: getColorBar(value),
-                        )),
+                      Animate().toggle(
+                        duration: 600.milliseconds,
+                        builder: (context, toggle, child) {
+                          return AnimatedContainer(
+                            duration: 600.milliseconds,
+                            height: 20,
+                            width: toggle
+                                ? 0
+                                : constraints.maxWidth *
+                                    (min(value, 100) / 100),
+                            child: DecoratedBox(
+                                decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(10),
+                              color: getColorBar(value),
+                            )),
+                          );
+                        },
                       ),
                     ],
                   );
@@ -161,10 +170,10 @@ class __CardTabState extends State<_CardTab> {
       );
 
   Color getColorBar(int value) {
-    if (value > 80) {
+    if (value >= 80) {
       return primaryColor;
     }
-    if (value > 50) {
+    if (value >= 50) {
       return const Color(0xffFFCE50);
     }
     return const Color(0xffFF7D94);

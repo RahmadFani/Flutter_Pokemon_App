@@ -1,12 +1,21 @@
 part of '../home.dart';
 
+GetIt getIt = GetIt.I;
+
 class HomePage extends StatelessWidget {
   const HomePage({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return BlocProvider(
-      create: (context) => HomeBloc()..add(GettingListGeneration()),
+    return MultiBlocProvider(
+      providers: [
+        BlocProvider<HomeBloc>(
+          create: (context) => HomeBloc()..add(GettingListGeneration()),
+        ),
+        BlocProvider<FavoritesBloc>.value(
+          value: getIt<FavoritesBloc>(),
+        ),
+      ],
       child: const Scaffold(
         body: HomeView(),
       ),

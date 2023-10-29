@@ -59,9 +59,29 @@ class _PokemonCard extends StatelessWidget {
                   const SizedBox(
                     height: 20,
                   ),
-                  ElevatedButton(
-                    onPressed: () {},
-                    child: const Text('ADD TO FAVORITE'),
+                  BlocBuilder<FavoritesBloc, FavoritesState>(
+                    builder: (context, favorites) {
+                      bool isFavorite = favorites.favorites
+                          .where((element) => element.url == state.url)
+                          .isNotEmpty;
+                      return ElevatedButton(
+                        style: ElevatedButton.styleFrom(
+                            backgroundColor:
+                                isFavorite ? const Color(0xffAA184C) : null),
+                        onPressed: () {
+                          context.read<FavoritesBloc>().add(
+                                SetFavorite(
+                                  favorite: Favorite(
+                                      name: state.name,
+                                      url: state.url,
+                                      pokemon: pokemon),
+                                ),
+                              );
+                        },
+                        child:
+                            Text(isFavorite ? 'UNFAVORITE' : 'ADD TO FAVORITE'),
+                      );
+                    },
                   ),
                 ]),
               ),
@@ -76,8 +96,8 @@ class _PokemonCard extends StatelessWidget {
           right: 0,
           child: Image.network(
             state.imageUrl,
-            height: 280,
-            width: 280,
+            height: 250,
+            width: 250,
             fit: BoxFit.cover,
           ),
         ).animate().scale(delay: 500.milliseconds)

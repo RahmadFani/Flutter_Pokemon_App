@@ -46,7 +46,7 @@ class PokemonDetailBloc
   }
 
   @override
-  String get id => state.url;
+  String get id => url;
 
   FutureOr<void> _mapGetPokemonDetail(
       GetPokemonDetail event, Emitter<PokemonDetailState> emit) async {

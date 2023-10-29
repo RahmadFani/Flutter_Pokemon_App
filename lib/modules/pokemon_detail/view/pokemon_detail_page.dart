@@ -1,5 +1,7 @@
 part of '../pokemon_detail.dart';
 
+GetIt getIt = GetIt.I;
+
 class PokemonDetailPage extends StatelessWidget {
   const PokemonDetailPage({
     super.key,
@@ -14,12 +16,19 @@ class PokemonDetailPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocProvider(
-      create: (context) => PokemonDetailBloc(
-        name: name,
-        url: url,
-        pokemons: pokemons,
-      )..add(GetPokemonDetail()),
+    return MultiBlocProvider(
+      providers: [
+        BlocProvider<PokemonDetailBloc>(
+          create: (context) => PokemonDetailBloc(
+            name: name,
+            url: url,
+            pokemons: pokemons,
+          )..add(GetPokemonDetail()),
+        ),
+        BlocProvider<FavoritesBloc>.value(
+          value: getIt<FavoritesBloc>(),
+        )
+      ],
       child: const Scaffold(
         body: PokemonDetailView(),
       ),
