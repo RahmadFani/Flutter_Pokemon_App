@@ -53,6 +53,7 @@ class HomeView extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: [
                       CustomButtonIconWidget(
+                        key: const Key('_buttonTabExplore'),
                         onPressed: () {
                           context
                               .read<HomeBloc>()
@@ -66,6 +67,7 @@ class HomeView extends StatelessWidget {
                         ),
                       ),
                       CustomButtonIconWidget(
+                        key: const Key('_buttonTabFavorite'),
                         onPressed: () {
                           context
                               .read<HomeBloc>()
