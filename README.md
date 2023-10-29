@@ -24,3 +24,9 @@ flutter run
 ``` terminal
 dart run build_runner build
 ```
+
+> Generate Testing Unit Coverage
+``` terminal
+flutter test --coverage
+```
+

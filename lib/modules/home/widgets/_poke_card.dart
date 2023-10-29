@@ -8,6 +8,7 @@ class _PokeCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return InkWell(
+      key: const Key('_pokeCardTapToPokemonDetail'),
       onTap: () {
         PokemonDetailRoute(
           name: fav.name,

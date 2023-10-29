@@ -50,6 +50,7 @@ class _GenerationList extends StatelessWidget {
 
   Widget _listGenerationBody(BuildContext context, HomeState state) {
     return ListView.builder(
+        key: const Key('_listGenerationBody'),
         itemCount: state.generations.length,
         padding: const EdgeInsets.symmetric(horizontal: 30),
         itemBuilder: (_, index) {
@@ -60,6 +61,7 @@ class _GenerationList extends StatelessWidget {
               width: double.infinity,
               height: 50,
               child: OutlinedButton(
+                key: const Key("_ButtonToGenerationDetail"),
                 onPressed: () {
                   GenerationDetailRoute(
                           name: generation.name, url: generation.url)

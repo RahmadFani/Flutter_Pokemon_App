@@ -6,6 +6,7 @@ class _FavoriteList extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<FavoritesBloc, FavoritesState>(
+      key: const Key('_favoriteListWidget'),
       builder: (context, state) {
         return Column(
           children: [

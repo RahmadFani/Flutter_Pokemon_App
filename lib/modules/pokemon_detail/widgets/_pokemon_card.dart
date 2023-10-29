@@ -9,6 +9,7 @@ class _PokemonCard extends StatelessWidget {
   Widget build(BuildContext context) {
     final pokemon = state.pokemon!;
     return Stack(
+      key: const Key('_PokemonCard_Detail'),
       fit: StackFit.expand,
       children: [
         Positioned(
