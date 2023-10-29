@@ -42,6 +42,13 @@ class GenerationDetailBloc
     try {
       final data = await _fetchGenerationDetail();
       emit(state.copyWith(detail: data, loading: false));
+    } on http.ClientException {
+      emit(
+        state.copyWith(
+            errorMessage:
+                'Trouble internet, Mode offline available if you already load data',
+            loading: false),
+      );
     } catch (e) {
       emit(
         state.copyWith(errorMessage: e.toString(), loading: false),

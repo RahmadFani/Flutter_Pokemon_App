@@ -52,6 +52,13 @@ class PokemonDetailBloc
     try {
       final data = await _fetchPokemonDetail();
       emit(state.copyWith(pokemon: data));
+    } on http.ClientException {
+      emit(
+        state.copyWith(
+          errorMessage:
+              'Trouble internet, Mode offline available if you already load data',
+        ),
+      );
     } catch (e) {
       emit(
         state.copyWith(

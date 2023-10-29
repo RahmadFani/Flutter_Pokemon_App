@@ -43,7 +43,7 @@ class _ListSpecies extends StatelessWidget {
                         horizontal: 16, vertical: 16),
                     sliver: SliverGrid.extent(
                       childAspectRatio: .78,
-                      maxCrossAxisExtent: context.getSize.width * .85,
+                      maxCrossAxisExtent: context.getSize.width * .5,
                       crossAxisSpacing: 14,
                       mainAxisSpacing: 14,
                       children: detail.pokemons.map((pokemon) {
