@@ -1,6 +1,5 @@
-# PT Esensi Solusi Buana
+# Flutter Sample with bloc
 
-FLUTTER ASSESSMENT TEST
 
 Name: Rahmad Fani
 
